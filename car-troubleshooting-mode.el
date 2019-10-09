@@ -13,18 +13,16 @@
 
 (defun ctm--car-troubleshooting-mode ()
   "Creates a buffer and set it to Car Troubleshooting Mode"
-  (interactive)
   (kill-all-local-variables)
   (setq major-mode 'car-troubleshooting-mode)
   (setq mode-name car-troubleshooting-mode-name)
   (ctm--setup))
 
 (defun car-troubleshooting ()
+  (interactive)
   (let ((buffer (get-buffer-create car-troubleshooting-mode-buffer-name)))
     (display-buffer buffer)
     (with-current-buffer buffer
-      (ctm--car-troubleshooting-mode)))
-  
- )
+      (ctm--car-troubleshooting-mode))))
 
 (provide 'car-troubleshooting-mode)
