@@ -20,13 +20,12 @@
       (car-troubleshooting)
       (expect (buffer-substring (point-min) (point-max))
               :to-equal "Is the car silent when you turn the key?"))
-    (xit "resets the content of the previous troubleshooting buffer"
+    (it "resets the content of the previous troubleshooting buffer"
       (car-troubleshooting)
       (car-troubleshooting)
       (expect (buffer-substring (point-min) (point-max))
               :to-equal "Is the car silent when you turn the key?"))
-    (xit "displays the buffer with the troubleshooting"
-      
+    (it "displays the buffer with the troubleshooting"      
       (spy-on 'display-buffer)
       (car-troubleshooting)
       (let ((buffer (get-argument (spy-calls-all-args 'display-buffer))))
