@@ -33,9 +33,5 @@
       (expect (buffer-substring (point-min) (point-max))
               :to-equal "Is the car silent when you turn the key?"))
     (it "displays the buffer with the troubleshooting"      
-      (spy-on 'display-buffer)
       (car-troubleshooting)
-      (let ((buffer (get-argument (spy-calls-all-args 'display-buffer))))
-        (expect (current-buffer) :to-be buffer)
-        (with-current-buffer buffer
-          (expect major-mode :to-be 'car-troubleshooting-mode))))))
+      (expect major-mode :to-be 'car-troubleshooting-mode))))

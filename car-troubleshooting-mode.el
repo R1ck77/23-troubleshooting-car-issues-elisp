@@ -22,8 +22,7 @@
 (defun car-troubleshooting ()
   (interactive)
   (let ((buffer (get-buffer-create car-troubleshooting-mode-buffer-name)))
-    (display-buffer buffer)
-    (set-buffer buffer)
+    (switch-to-buffer buffer)
     (ctm--car-troubleshooting-mode)))
 
 (provide 'car-troubleshooting-mode)
