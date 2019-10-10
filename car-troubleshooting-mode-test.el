@@ -6,6 +6,7 @@
 (defun get-argument (args)
   (first (first args)))
 
+;;; TODO/FIXME duplicated code
 (defun generate-supplier (results)
   (lexical-let ((results results))
     (lambda (&optional ignored)
@@ -34,4 +35,14 @@
               :to-equal "Is the car silent when you turn the key?"))
     (it "displays the buffer with the troubleshooting"      
       (car-troubleshooting)
-      (expect major-mode :to-be 'car-troubleshooting-mode))))
+      (expect major-mode :to-be 'car-troubleshooting-mode))
+    (it "follows the correct path of results"
+      (spy-on 'ctm-read-boolean :and-call-fake (generate-supplier (list "n" "n" "y")))
+      (car-troubleshooting)
+      (expect (buffer-substring (point-min) (point-max))
+              :to-equal "Is the car silent when you turn the key? No
+Does the car make a clicking noise? No
+Does the car crank up but fail to start? Yes
+PROPOSED SOLUTION:
+Check spark plug connections.
+"))))

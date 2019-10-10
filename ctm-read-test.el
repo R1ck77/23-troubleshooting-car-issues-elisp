@@ -5,6 +5,7 @@
 (defun get-argument (args)
   (first (first args)))
 
+;;; TODO/FIXME duplicated code
 (defun generate-supplier (results)
   (lexical-let ((results results))
     (lambda (&optional ignored)
