@@ -27,12 +27,12 @@
     (it "shows the appropriate first question"    
       (car-troubleshooting)
       (expect (buffer-substring (point-min) (point-max))
-              :to-equal "Is the car silent when you turn the key?"))
+              :to-equal "Is the car silent when you turn the key? "))
     (it "resets the content of the previous troubleshooting buffer"
       (car-troubleshooting)
       (car-troubleshooting)
       (expect (buffer-substring (point-min) (point-max))
-              :to-equal "Is the car silent when you turn the key?"))
+              :to-equal "Is the car silent when you turn the key? "))
     (it "displays the buffer with the troubleshooting"      
       (car-troubleshooting)
       (expect major-mode :to-be 'car-troubleshooting-mode))
