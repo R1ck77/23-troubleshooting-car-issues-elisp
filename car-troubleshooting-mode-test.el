@@ -36,6 +36,6 @@
       (spy-on 'display-buffer)
       (car-troubleshooting)
       (let ((buffer (get-argument (spy-calls-all-args 'display-buffer))))
+        (expect (current-buffer) :to-be buffer)
         (with-current-buffer buffer
-          (expect major-mode :to-be 'car-troubleshooting-mode))))
-    ))
+          (expect major-mode :to-be 'car-troubleshooting-mode))))))
