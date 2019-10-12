@@ -47,9 +47,15 @@
   (setq mode-name car-troubleshooting-mode-name)
   (ctm--setup))
 
+(defun ctm--get-new-buffer ()
+  (let ((previous-buffer (get-buffer car-troubleshooting-mode-buffer-name)))
+    (when previous-buffer
+      (kill-buffer previous-buffer)))
+  (get-buffer-create car-troubleshooting-mode-buffer-name))
+
 (defun car-troubleshooting ()
   (interactive)
-  (let ((buffer (get-buffer-create car-troubleshooting-mode-buffer-name)))
+  (let ((buffer (ctm--get-new-buffer)))
     (switch-to-buffer buffer)
     (ctm--car-troubleshooting-mode)))
 
