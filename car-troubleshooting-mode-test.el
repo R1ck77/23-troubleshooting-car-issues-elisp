@@ -58,4 +58,12 @@ Does the car make a clicking noise? No
 Does the car crank up but fail to start? No
 Does the engine start and then die? No
 PROPOSED SOLUTION:
-Close the computer and go see a real mechanic, doofus!"))))
+Close the computer and go see a real mechanic, doofus!"))
+    (it "handles poor user input like a pro"
+      (spy-on 'read-string :and-call-fake (generate-supplier '("foo" "bar" "YeS" "Baz" "22" "nope" "nO")))
+      (car-troubleshooting)
+      (expect (buffer-substring (point-min) (point-max))
+              :to-equal "Is the car silent when you turn the key? Yes
+Are the battery terminals corroded? No
+PROPOSED SOLUTION:
+Replace cables and try again."))))

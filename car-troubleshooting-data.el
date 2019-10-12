@@ -1,7 +1,7 @@
 
 (defconst car-troubleshooting-data
   '("Is the car silent when you turn the key?"
-    ("Are the battery terminal corroded?"
+    ("Are the battery terminals corroded?"
      "Clean terminals and try starting again."
      "Replace cables and try again.")
     ("Does the car make a clicking noise?"
