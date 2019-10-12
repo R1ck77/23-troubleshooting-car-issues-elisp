@@ -16,26 +16,32 @@
       car-troubleshooting-yes
     car-troubleshooting-no))
 
+(defun ctm--decide-step (answers user-answer)
+  (let ((next-step answers))
+    (insert (ctm--format-boolean user-answer))
+    (insert "\n")
+    (ctm--procedure (if user-answer
+                        (first next-step)
+                      (second next-step)))))
+
+(defun ctm--ask-question (question-text)
+  (let ((question (concat question-text " ")))
+    (insert question)
+    (ctm-read-boolean question)))
+
+(defun ctm--next-question (procedure)
+  (ctm--decide-step (rest procedure)
+                    (ctm--ask-question (first procedure))))
+
 (defun ctm--write-solution (data)
   (insert
    (format "PROPOSED SOLUTION:\n%s" data)))
 
-;;; TODO/FIXME refactor
 (defun ctm--procedure (procedure)
-  (let ((question (concat (first procedure) " "))
-        (answer (rest procedure)))
-    (insert question)
-    (let ((user-answer (ctm-read-boolean question)))
-      (insert (ctm--format-boolean user-answer))
-      (insert "\n")
-      (let ((next (if user-answer
-                      (first answer)
-                    (second answer))))
-        (if (stringp next)
-            (ctm--write-solution next)
-          (if next
-              (ctm--procedure next)
-            (ctm--write-solution "Close the computer and go see a real mechanic, doofus!")))))))
+  (cond
+   ((stringp procedure) (ctm--write-solution procedure))
+   ((null procedure) (ctm--write-solution "Close the computer and go see a real mechanic, doofus!"))
+   (:otherwise (ctm--next-question procedure))))
 
 (defun ctm--setup ()
   (erase-buffer)

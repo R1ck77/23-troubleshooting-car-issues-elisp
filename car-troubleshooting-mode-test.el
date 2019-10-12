@@ -11,7 +11,7 @@
   (describe "car-troubleshooting"
     (before-each
       (kill-buffer (get-buffer "* Car Troubleshooting Mode *")))
-    (it "creates a buffer with t%he specified name and mode"
+    (it "creates a buffer with the specified name and mode"
       (spy-on'ctm-read-boolean)
       (car-troubleshooting)
       (let ((troubleshooting-buffer (get-buffer "* Car Troubleshooting Mode *")))
