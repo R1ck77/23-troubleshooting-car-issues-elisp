@@ -34,7 +34,7 @@
             (ctm--write-solution next)
           (if next
               (ctm--procedure next)
-            (ctm--write-solution "See a mechanic, dofus")))))))
+            (ctm--write-solution "Close the computer and go see a real mechanic, doofus!")))))))
 
 (defun ctm--setup ()
   (erase-buffer)

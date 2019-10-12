@@ -48,4 +48,14 @@
 Does the car make a clicking noise? No
 Does the car crank up but fail to start? Yes
 PROPOSED SOLUTION:
-Check spark plug connections."))))
+Check spark plug connections."))
+    (it "bail with class when it doesn't have answers"
+      (spy-on 'ctm-read-boolean :and-call-fake (generate-supplier '(nil nil nil nil nil)))
+      (car-troubleshooting)
+      (expect (buffer-substring (point-min) (point-max))
+              :to-equal "Is the car silent when you turn the key? No
+Does the car make a clicking noise? No
+Does the car crank up but fail to start? No
+Does the engine start and then die? No
+PROPOSED SOLUTION:
+Close the computer and go see a real mechanic, doofus!"))))
