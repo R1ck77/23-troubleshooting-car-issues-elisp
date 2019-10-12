@@ -20,6 +20,7 @@
   (insert
    (format "PROPOSED SOLUTION:\n%s" data)))
 
+;;; TODO/FIXME refactor
 (defun ctm--procedure (procedure)
   (let ((question (concat (first procedure) " "))
         (answer (rest procedure)))
