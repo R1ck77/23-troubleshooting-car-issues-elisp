@@ -25,17 +25,6 @@
         (expect (buffer-live-p troubleshooting-buffer) :to-be t)
         (with-current-buffer troubleshooting-buffer
           (expect major-mode :to-be 'car-troubleshooting-mode))))
-    (xit "shows the appropriate first question"   ; TODO/FIXME can this test be refactored?
-      (spy-on'ctm-read-boolean)
-      (car-troubleshooting)
-      (expect (buffer-substring (point-min) (point-max))
-              :to-equal "Is the car silent when you turn the key? "))
-    (xit "resets the content of the previous troubleshooting buffer" ; TODO/FIXME same…
-      (spy-on'ctm-read-boolean)
-      (car-troubleshooting)
-      (car-troubleshooting)
-      (expect (buffer-substring (point-min) (point-max))
-              :to-equal "Is the car silent when you turn the key? "))
     (it "displays the buffer with the troubleshooting"      
       (spy-on'ctm-read-boolean)
       (car-troubleshooting)
@@ -66,4 +55,16 @@ Close the computer and go see a real mechanic, doofus!"))
               :to-equal "Is the car silent when you turn the key? Yes
 Are the battery terminals corroded? No
 PROPOSED SOLUTION:
-Replace cables and try again."))))
+Replace cables and try again."))
+    (it "works correctly if another buffer with the same name is present"
+        (with-current-buffer (get-buffer-create "* Car Troubleshooting Mode *")
+          (insert "**** Text That I Wouldn't Want To See ****")
+          (setq buffer-read-only t))
+      (spy-on 'ctm-read-boolean :and-call-fake (generate-supplier '(nil nil t)))
+      (car-troubleshooting)
+      (expect (buffer-substring (point-min) (point-max))
+              :to-equal "Is the car silent when you turn the key? No
+Does the car make a clicking noise? No
+Does the car crank up but fail to start? Yes
+PROPOSED SOLUTION:
+Check spark plug connections."))))
