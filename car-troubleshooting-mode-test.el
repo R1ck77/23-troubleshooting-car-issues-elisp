@@ -1,18 +1,11 @@
 (require 'cl)
 (require 'buttercup)
 (setq load-path (cons "." load-path))
+(require 'test-utils)
 (require 'car-troubleshooting-mode)
 
 (defun get-argument (args)
   (first (first args)))
-
-;;; TODO/FIXME duplicated code
-(defun generate-supplier (results)
-  (lexical-let ((results results))
-    (lambda (&optional ignored)
-      (let ((next-result (first results)))
-        (setq results (rest results))
-        next-result))))
 
 (describe "car-troubleshooting-mode.el"  
   (describe "car-troubleshooting"

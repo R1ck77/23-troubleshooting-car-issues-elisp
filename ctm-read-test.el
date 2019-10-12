@@ -1,17 +1,10 @@
 (require 'buttercup)
 (setq load-path (cons "." load-path))
+(require 'test-utils)
 (require 'ctm-read)
 
 (defun get-argument (args)
   (first (first args)))
-
-;;; TODO/FIXME duplicated code
-(defun generate-supplier (results)
-  (lexical-let ((results results))
-    (lambda (&optional ignored)
-      (let ((next-result (first results)))
-        (setq results (rest results))
-        next-result))))
 
 (describe "ctm-read.el"  
   (describe "ctm-read-boolean"
